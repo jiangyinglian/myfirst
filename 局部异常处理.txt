@@ -1,0 +1,18 @@
+8
+	@RequestMapping(value="/exlogin.html",method=RequestMethod.GET)
+	public String exLogin(@RequestParam String userCode,@RequestParam String userPassword){
+		logger.debug("exLogin====================================");
+		//调用service方法，进行用户匹配
+		User user = userService.login(userCode,userPassword);
+		if(null == user){//登录失败
+			throw new RuntimeException("用户名或者密码不正确！");
+		}
+		return "redirect:/user/main.html";
+	}
+	//局部异常处理
+	@ExceptionHandler(value={RuntimeException.class})
+	public String handlerException(RuntimeException e,HttpServletRequest req){
+		req.setAttribute("e", e);
+		return "error";
+	}
+	
