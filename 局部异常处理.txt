@@ -9,6 +9,7 @@
 		}
 		return "redirect:/user/main.html";
 	}
+	//全局异常
 	//局部异常处理
 	@ExceptionHandler(value={RuntimeException.class})
 	public String handlerException(RuntimeException e,HttpServletRequest req){
